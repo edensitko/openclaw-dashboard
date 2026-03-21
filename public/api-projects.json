@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "title": "Telegram Bot Ecosystem",
+    "description": "4-bot system for product development workflow",
+    "priority": "high",
+    "labels": ["bot", "infra"],
+    "status": "in-progress",
+    "progress": 100
+  },
+  {
+    "id": "2",
+    "title": "Dashboard - Live Metrics",
+    "description": "Real-time server monitoring with glassmorphism UI",
+    "priority": "high",
+    "labels": ["feature", "design"],
+    "status": "completed",
+    "progress": 100
+  },
+  {
+    "id": "3",
+    "title": "Drone CI/CD Setup",
+    "description": "GitHub webhook + Docker-based builds",
+    "priority": "medium",
+    "labels": ["infra", "feature"],
+    "status": "in-progress",
+    "progress": 75
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "title": "Verify all 4 bots are running",
+    "priority": "high",
+    "status": "pending",
+    "dueAt": "2026-03-21T14:00:00Z"
+  },
+  {
+    "id": "2",
+    "title": "Test Drone webhook with GitHub push",
+    "priority": "medium",
+    "status": "pending",
+    "dueAt": "2026-03-21T15:00:00Z"
+  },
+  {
+    "id": "3",
+    "title": "Check API response times",
+    "priority": "medium",
+    "status": "pending",
+    "dueAt": "2026-03-21T14:30:00Z"
+  },
+  {
+    "id": "4",
+    "title": "Add real metrics to dashboard",
+    "priority": "high",
+    "status": "completed",
+    "dueAt": "2026-03-21T13:45:00Z"
+  }
+]

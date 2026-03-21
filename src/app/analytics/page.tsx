@@ -1,121 +1,117 @@
 "use client";
 
-import CpuMemoryChart from "@/components/dashboard/RequestsChart";
-import DiskUsageChart from "@/components/dashboard/ModelUsageChart";
-import LoadAverageChart from "@/components/dashboard/LatencyChart";
-import { useSystemData } from "@/lib/useSystemData";
-import { useChartTheme } from "@/components/ThemeProvider";
-import { motion } from "framer-motion";
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+import { useEffect, useState } from "react";
 
 export default function AnalyticsPage() {
-  const { data, history, network } = useSystemData(3000);
-  const chart = useChartTheme();
+  const [usage, setUsage] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  const cpuData = history.map((p) => ({
-    name: new Date(p.timestamp).toLocaleTimeString([], { minute: "2-digit", second: "2-digit" }),
-    value: p.cpu,
-  }));
+  useEffect(() => {
+    fetch("/api/usage")
+      .then(r => r.json())
+      .then(setUsage)
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
 
-  const memData = history.map((p) => ({
-    name: new Date(p.timestamp).toLocaleTimeString([], { minute: "2-digit", second: "2-digit" }),
-    value: p.memory,
-  }));
+  if (loading) return <div style={{ color: "#fff", padding: "40px" }}>Loading...</div>;
+  if (!usage) return <div style={{ color: "#fff", padding: "40px" }}>No data</div>;
 
-  const tooltipStyle = chart.tooltip;
+  const anthropic = usage.anthropic?.total || {};
+  const openai = usage.openai?.total || {};
+  const today_anthro = usage.anthropic?.daily?.["2026-03-21"] || {};
+  const today_openai = usage.openai?.daily?.["2026-03-21"] || {};
 
   return (
-    <div className="space-y-5">
-      <div>
-        <h2 className="text-2xl font-bold text-heading">Analytics</h2>
-        <p className="text-sm text-muted">
-          Performance metrics — {data?.hostname || "connecting..."}
-        </p>
-      </div>
+    <div style={{ padding: "40px", backgroundColor: "#0a0e27", color: "#fff", minHeight: "100vh", fontFamily: "system-ui" }}>
+      <h1 style={{ fontSize: "28px", marginBottom: "10px" }}>📊 API Usage & Costs</h1>
+      <p style={{ color: "#666", marginBottom: "40px" }}>Real-time tracking of Anthropic + OpenAI APIs</p>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <CpuMemoryChart history={history} />
-        <DiskUsageChart data={data} />
-      </div>
+      {/* Today's Usage */}
+      <div style={{ marginBottom: "40px" }}>
+        <h2 style={{ fontSize: "18px", color: "#00f0ff", marginBottom: "20px" }}>📅 Today (2026-03-21)</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "20px" }}>
+          {/* Anthropic Today */}
+          <div style={{ backgroundColor: "#1a1f3a", border: "1px solid #2d3148", padding: "20px", borderRadius: "12px" }}>
+            <div style={{ fontSize: "12px", color: "#00f0ff", marginBottom: "10px", textTransform: "uppercase" }}>Anthropic (Today)</div>
+            <div style={{ fontSize: "24px", fontWeight: "bold", color: "#00f0ff", marginBottom: "5px" }}>
+              {today_anthro.tokens_in || 0} in
+            </div>
+            <div style={{ fontSize: "14px", color: "#666", marginBottom: "10px" }}>
+              {today_anthro.tokens_out || 0} out
+            </div>
+            <div style={{ fontSize: "16px", fontWeight: "bold", color: "#00ff88" }}>
+              ${(today_anthro.cost || 0).toFixed(4)}
+            </div>
+          </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {/* CPU chart */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass p-5">
-          <h3 className="text-heading font-semibold mb-1">CPU History</h3>
-          <p className="text-xs text-muted mb-4">{data?.cpu.model.split("@")[0].trim() || "—"}</p>
-          <ResponsiveContainer width="100%" height={200}>
-            <AreaChart data={cpuData}>
-              <defs>
-                <linearGradient id="cpuOnly" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#00F0FF" stopOpacity={0.3} />
-                  <stop offset="100%" stopColor="#00F0FF" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke={chart.grid} />
-              <XAxis dataKey="name" tick={{ fill: chart.tick, fontSize: 10 }} tickLine={false} interval="preserveStartEnd" />
-              <YAxis domain={[0, 100]} tick={{ fill: chart.tick, fontSize: 12 }} tickLine={false} axisLine={false} unit="%" />
-              <Tooltip contentStyle={tooltipStyle} />
-              <Area type="monotone" dataKey="value" stroke="#00F0FF" strokeWidth={2} fill="url(#cpuOnly)" name="CPU %" isAnimationActive={false} />
-            </AreaChart>
-          </ResponsiveContainer>
-        </motion.div>
-
-        {/* Memory chart */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="glass p-5">
-          <h3 className="text-heading font-semibold mb-1">Memory History</h3>
-          <p className="text-xs text-muted mb-4">{data ? `${data.memory.used} / ${data.memory.total}` : "—"}</p>
-          <ResponsiveContainer width="100%" height={200}>
-            <AreaChart data={memData}>
-              <defs>
-                <linearGradient id="memOnly" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#6C63FF" stopOpacity={0.3} />
-                  <stop offset="100%" stopColor="#6C63FF" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke={chart.grid} />
-              <XAxis dataKey="name" tick={{ fill: chart.tick, fontSize: 10 }} tickLine={false} interval="preserveStartEnd" />
-              <YAxis domain={[0, 100]} tick={{ fill: chart.tick, fontSize: 12 }} tickLine={false} axisLine={false} unit="%" />
-              <Tooltip contentStyle={tooltipStyle} />
-              <Area type="monotone" dataKey="value" stroke="#6C63FF" strokeWidth={2} fill="url(#memOnly)" name="Memory %" isAnimationActive={false} />
-            </AreaChart>
-          </ResponsiveContainer>
-        </motion.div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <LoadAverageChart data={data} />
-        <div className="glass p-5">
-          <h3 className="text-heading font-semibold mb-1">System Snapshot</h3>
-          <p className="text-xs text-muted mb-4">Current state</p>
-          <div className="space-y-3">
-            {[
-              { label: "Hostname", value: data?.hostname ?? "—", color: "#00F0FF" },
-              { label: "OS", value: data ? `${data.osType} ${data.osRelease}` : "—", color: "#6C63FF" },
-              { label: "Architecture", value: data?.arch ?? "—", color: "#00FF88" },
-              { label: "CPU Speed", value: data ? `${data.cpu.speed} MHz` : "—", color: "#FFD93D" },
-              { label: "Uptime", value: data?.uptime ?? "—", color: "#FF6B6B" },
-              { label: "Connections", value: network?.activeConnections.toString() ?? "—", color: "#9E9EBE" },
-              { label: "Network RX", value: network?.totalRx ?? "—", color: "#00FF88" },
-              { label: "Network TX", value: network?.totalTx ?? "—", color: "#00F0FF" },
-            ].map((item) => (
-              <div key={item.label} className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
-                  <span className="text-sm text-subtle">{item.label}</span>
-                </div>
-                <span className="text-sm font-mono text-heading">{item.value}</span>
-              </div>
-            ))}
+          {/* OpenAI Today */}
+          <div style={{ backgroundColor: "#1a1f3a", border: "1px solid #2d3148", padding: "20px", borderRadius: "12px" }}>
+            <div style={{ fontSize: "12px", color: "#6c63ff", marginBottom: "10px", textTransform: "uppercase" }}>OpenAI (Today)</div>
+            <div style={{ fontSize: "24px", fontWeight: "bold", color: "#6c63ff", marginBottom: "5px" }}>
+              {today_openai.tokens_in || 0} in
+            </div>
+            <div style={{ fontSize: "14px", color: "#666", marginBottom: "10px" }}>
+              {today_openai.tokens_out || 0} out
+            </div>
+            <div style={{ fontSize: "16px", fontWeight: "bold", color: "#00ff88" }}>
+              ${(today_openai.cost || 0).toFixed(4)}
+            </div>
           </div>
         </div>
+      </div>
+
+      {/* Total Usage */}
+      <div style={{ marginBottom: "40px" }}>
+        <h2 style={{ fontSize: "18px", color: "#00f0ff", marginBottom: "20px" }}>💰 Total (All Time)</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "20px" }}>
+          {/* Anthropic Total */}
+          <div style={{ backgroundColor: "#1a1f3a", border: "1px solid #2d3148", padding: "20px", borderRadius: "12px" }}>
+            <div style={{ fontSize: "12px", color: "#00f0ff", marginBottom: "10px", textTransform: "uppercase" }}>Anthropic Total</div>
+            <div style={{ fontSize: "28px", fontWeight: "bold", color: "#00f0ff", marginBottom: "5px" }}>
+              {anthropic.tokens_in || 0}
+            </div>
+            <div style={{ fontSize: "12px", color: "#666", marginBottom: "10px" }}>
+              Input Tokens
+            </div>
+            <div style={{ fontSize: "20px", fontWeight: "bold", color: "#00ff88" }}>
+              ${(anthropic.cost || 0).toFixed(4)}
+            </div>
+          </div>
+
+          {/* OpenAI Total */}
+          <div style={{ backgroundColor: "#1a1f3a", border: "1px solid #2d3148", padding: "20px", borderRadius: "12px" }}>
+            <div style={{ fontSize: "12px", color: "#6c63ff", marginBottom: "10px", textTransform: "uppercase" }}>OpenAI Total</div>
+            <div style={{ fontSize: "28px", fontWeight: "bold", color: "#6c63ff", marginBottom: "5px" }}>
+              {openai.tokens_in || 0}
+            </div>
+            <div style={{ fontSize: "12px", color: "#666", marginBottom: "10px" }}>
+              Input Tokens
+            </div>
+            <div style={{ fontSize: "20px", fontWeight: "bold", color: "#00ff88" }}>
+              ${(openai.cost || 0).toFixed(4)}
+            </div>
+          </div>
+
+          {/* Combined Total Cost */}
+          <div style={{ backgroundColor: "#1a1f3a", border: "1px solid #2d3148", padding: "20px", borderRadius: "12px" }}>
+            <div style={{ fontSize: "12px", color: "#ffd93d", marginBottom: "10px", textTransform: "uppercase" }}>Total Cost</div>
+            <div style={{ fontSize: "48px", fontWeight: "bold", color: "#ffd93d", marginBottom: "5px" }}>
+              ${((anthropic.cost || 0) + (openai.cost || 0)).toFixed(4)}
+            </div>
+            <div style={{ fontSize: "12px", color: "#666" }}>
+              Anthropic + OpenAI
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Raw JSON */}
+      <div style={{ marginTop: "40px", backgroundColor: "#1a1f3a", border: "1px solid #2d3148", padding: "20px", borderRadius: "12px" }}>
+        <h3 style={{ margin: "0 0 15px 0", fontSize: "14px", color: "#00f0ff" }}>Raw Data</h3>
+        <pre style={{ fontSize: "12px", color: "#666", overflow: "auto", maxHeight: "300px" }}>
+          {JSON.stringify(usage, null, 2)}
+        </pre>
       </div>
     </div>
   );
