@@ -22,7 +22,7 @@ import {
 
 const navItems = [
   { label: "Overview", href: "/", icon: LayoutDashboard, group: "Dashboard" },
-  { label: "Analytics", href: "/analytics", icon: BarChart3, group: "Dashboard" },
+  { label: "API Usage 💰", href: "/analytics", icon: BarChart3, group: "Dashboard" },
   { label: "ClawsBot", href: "/clawsbot", icon: Bot, group: "Dashboard" },
   { label: "Projects", href: "/projects", icon: KanbanSquare, group: "Dashboard" },
   { label: "Reminders", href: "/reminders", icon: Bell, group: "Dashboard" },

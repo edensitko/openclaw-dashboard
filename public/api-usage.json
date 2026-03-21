@@ -1,0 +1,68 @@
+{
+  "anthropic": {
+    "daily": {
+      "2026-03-20": {
+        "tokens_in": 5230,
+        "tokens_out": 1850,
+        "cost": 0.0089
+      },
+      "2026-03-21": {
+        "tokens_in": 3100,
+        "tokens_out": 920,
+        "cost": 0.0045
+      }
+    },
+    "monthly": {
+      "2026-03": {
+        "tokens_in": 45320,
+        "tokens_out": 18500,
+        "cost": 0.0876
+      }
+    },
+    "total": {
+      "tokens_in": 125400,
+      "tokens_out": 52300,
+      "cost": 0.2413
+    },
+    "models": {
+      "claude-haiku-4-5": {
+        "tokens_in": 125400,
+        "tokens_out": 52300,
+        "cost": 0.2413
+      }
+    }
+  },
+  "openai": {
+    "daily": {
+      "2026-03-20": {
+        "tokens_in": 2100,
+        "tokens_out": 650,
+        "cost": 0.0121
+      },
+      "2026-03-21": {
+        "tokens_in": 1500,
+        "tokens_out": 380,
+        "cost": 0.0079
+      }
+    },
+    "monthly": {
+      "2026-03": {
+        "tokens_in": 28900,
+        "tokens_out": 9200,
+        "cost": 0.189
+      }
+    },
+    "total": {
+      "tokens_in": 52800,
+      "tokens_out": 15400,
+      "cost": 0.3542
+    },
+    "models": {
+      "gpt-4o-mini": {
+        "tokens_in": 52800,
+        "tokens_out": 15400,
+        "cost": 0.3542
+      }
+    }
+  }
+}
