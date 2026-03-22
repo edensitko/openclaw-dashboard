@@ -1400,31 +1400,31 @@ export default function WebsiteCharacterization() {
               <SubHeading icon={Flag}>שלבי פרויקט</SubHeading>
             </div>
 
-            <button onClick={addPhase} className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white transition-all" style={{ background: "linear-gradient(135deg, #6C63FF, #00F0FF)" }}>
+            <button onClick={addPhase} className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white transition-all" style={{ background: "linear-gradient(135deg, #6C63FF, #00F0FF)" }}>
               <Plus size={16} /> הוסף שלב
             </button>
 
             <AnimatePresence mode="popLayout">
               {data.phases.map((phase, i) => (
-                <motion.div key={phase.id} {...stagger(i)} exit={{ opacity: 0, height: 0 }} layout className="glass rounded-xl p-5 group">
+                <motion.div key={phase.id} {...stagger(i)} exit={{ opacity: 0, height: 0 }} layout className="glass rounded-xl p-4 sm:p-5 group">
                   <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold" style={{ backgroundColor: "rgba(0,240,255,0.12)", color: "#00F0FF" }}>
+                    <div className="flex items-center gap-2 min-w-0 flex-1">
+                      <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0" style={{ backgroundColor: "rgba(0,240,255,0.12)", color: "#00F0FF" }}>
                         {i + 1}
                       </div>
                       <input
                         type="text"
                         value={phase.name}
                         onChange={(e) => updatePhase(phase.id, { name: e.target.value })}
-                        className="text-base font-semibold bg-transparent border-none outline-none"
+                        className="text-sm sm:text-base font-semibold bg-transparent border-none outline-none min-w-0 w-full"
                         style={{ color: "var(--prd-heading)" }}
                       />
                     </div>
-                    <button onClick={() => deletePhase(phase.id)} className="p-2 rounded-xl opacity-0 group-hover:opacity-100 transition-all" style={{ color: "#FF6B6B" }}>
+                    <button onClick={() => deletePhase(phase.id)} className="p-2 rounded-xl opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all shrink-0" style={{ color: "#FF6B6B" }}>
                       <Trash2 size={16} />
                     </button>
                   </div>
-                  <div className="grid grid-cols-2 gap-3 mb-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                     <div>
                       <label className="block text-[10px] uppercase tracking-wider mb-1" style={{ color: "var(--prd-muted)" }}>התחלה</label>
                       <input type="date" value={phase.startDate} onChange={(e) => updatePhase(phase.id, { startDate: e.target.value })} className="prd-input text-sm" />
@@ -1469,7 +1469,7 @@ export default function WebsiteCharacterization() {
             </AnimatePresence>
 
             {data.phases.length === 0 && (
-              <div className="glass-inset rounded-xl p-8 text-center">
+              <div className="glass-inset rounded-xl p-5 sm:p-8 text-center">
                 <Calendar size={28} className="mx-auto mb-2 opacity-30" style={{ color: "var(--prd-muted)" }} />
                 <p className="text-sm" style={{ color: "var(--prd-muted)" }}>טרם הוגדרו שלבי פרויקט</p>
                 <p className="text-xs mt-1" style={{ color: "var(--prd-muted)", opacity: 0.6 }}>
@@ -1515,9 +1515,10 @@ export default function WebsiteCharacterization() {
               return (
                 <div>
                   <SubHeading icon={BarChart3}>תצוגת גאנט</SubHeading>
-                  <div className="glass rounded-2xl p-5 overflow-hidden">
+                  <div className="glass rounded-2xl p-3 sm:p-5 overflow-x-auto">
+                    <div className="min-w-[400px]">
                     {/* Month header */}
-                    <div className="relative h-6 mb-2" style={{ marginRight: 120 }}>
+                    <div className="relative h-6 mb-2" style={{ marginRight: 80 }}>
                       {monthMarkers.map((m, i) => (
                         <span
                           key={i}
@@ -1540,9 +1541,9 @@ export default function WebsiteCharacterization() {
                         const durationDays = Math.ceil((pEnd - pStart) / (1000 * 60 * 60 * 24));
 
                         return (
-                          <div key={phase.id} className="flex items-center gap-3">
+                          <div key={phase.id} className="flex items-center gap-2 sm:gap-3">
                             {/* Label */}
-                            <div className="w-[120px] shrink-0 text-left">
+                            <div className="w-[80px] shrink-0 text-left">
                               <p className="text-xs font-semibold truncate" style={{ color: "var(--prd-heading)" }}>{phase.name || `שלב ${i + 1}`}</p>
                               <p className="text-[10px]" style={{ color: "var(--prd-muted)" }}>{durationDays} ימים</p>
                             </div>
@@ -1593,8 +1594,9 @@ export default function WebsiteCharacterization() {
                       })}
                     </div>
 
+                    </div>{/* end min-w wrapper */}
                     {/* Legend */}
-                    <div className="flex items-center gap-4 mt-4 pt-3 flex-wrap" style={{ borderTop: "0.5px solid var(--prd-border)" }}>
+                    <div className="flex items-center gap-3 sm:gap-4 mt-4 pt-3 flex-wrap" style={{ borderTop: "0.5px solid var(--prd-border)" }}>
                       <div className="flex items-center gap-4 flex-wrap">
                         {phasesWithDates.map((phase, i) => (
                           <div key={phase.id} className="flex items-center gap-1.5">
@@ -1612,14 +1614,14 @@ export default function WebsiteCharacterization() {
                     </div>
 
                     {/* Summary bar */}
-                    <div className="glass-inset rounded-xl p-3 mt-3 flex items-center justify-between">
+                    <div className="glass-inset rounded-xl p-3 mt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
                       <div className="flex items-center gap-2">
                         <Clock size={12} style={{ color: "var(--prd-muted)" }} />
                         <span className="text-[10px] font-semibold" style={{ color: "var(--prd-muted)" }}>
                           משך כולל: {Math.ceil(totalSpan / (1000 * 60 * 60 * 24))} ימים
                         </span>
                       </div>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         <span className="text-[10px]" style={{ color: "var(--prd-muted)" }}>
                           {new Date(ganttStart).toLocaleDateString("he-IL")}
                         </span>
@@ -1672,9 +1674,9 @@ export default function WebsiteCharacterization() {
             {/* ─── Pricing hero ─── */}
             <div className="glass-heavy rounded-2xl overflow-hidden">
               {/* Side-by-side: project cost (right) | recurring total (left) */}
-              <div className="grid grid-cols-2" style={{ minHeight: 160 }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2" style={{ minHeight: 120 }}>
                 {/* Right — project cost */}
-                <div className="p-5 text-center relative group/main flex flex-col justify-center" style={{ background: "linear-gradient(180deg, rgba(0,255,136,0.06) 0%, transparent 100%)", borderLeft: "0.5px solid var(--prd-border)" }}>
+                <div className="p-4 sm:p-5 text-center relative group/main flex flex-col justify-center" style={{ background: "linear-gradient(180deg, rgba(0,255,136,0.06) 0%, transparent 100%)", borderLeft: "0.5px solid var(--prd-border)", borderBottom: "0.5px solid var(--prd-border)" }}>
                   <p className="text-[10px] uppercase tracking-widest mb-2 font-semibold" style={{ color: "var(--prd-muted)" }}>עלות הקמת הפרויקט</p>
                   <div className="flex items-center justify-center gap-1.5">
                     {data.finalPriceOverride !== null ? (
@@ -1682,12 +1684,12 @@ export default function WebsiteCharacterization() {
                         type="number"
                         value={data.finalPriceOverride}
                         onChange={(e) => update({ finalPriceOverride: e.target.value === "" ? null : Number(e.target.value) })}
-                        className="text-3xl font-black font-mono leading-none text-center bg-transparent border-none outline-none w-full"
+                        className="text-2xl sm:text-3xl font-black font-mono leading-none text-center bg-transparent border-none outline-none w-full"
                         style={{ color: "#00FF88" }}
                         dir="ltr"
                       />
                     ) : (
-                      <p className="text-3xl font-black font-mono leading-none" style={{ color: "#00FF88" }} dir="ltr">{formatCurrency(baseCost)}</p>
+                      <p className="text-2xl sm:text-3xl font-black font-mono leading-none" style={{ color: "#00FF88" }} dir="ltr">{formatCurrency(baseCost)}</p>
                     )}
                     <button
                       onClick={() => update({ finalPriceOverride: data.finalPriceOverride !== null ? null : baseCost })}
@@ -1707,7 +1709,7 @@ export default function WebsiteCharacterization() {
                 </div>
 
                 {/* Left — recurring total with toggle */}
-                <div className="p-5 text-center flex flex-col justify-center">
+                <div className="p-4 sm:p-5 text-center flex flex-col justify-center">
                   {/* Toggle */}
                   <div className="flex items-center justify-center gap-1.5 mb-3 rounded-xl p-1" style={{ backgroundColor: "var(--prd-surface)" }}>
                     <button
@@ -1744,12 +1746,12 @@ export default function WebsiteCharacterization() {
                             type="number"
                             value={data.finalMonthlyOverride}
                             onChange={(e) => update({ finalMonthlyOverride: e.target.value === "" ? null : Number(e.target.value) })}
-                            className="text-3xl font-black font-mono text-center bg-transparent border-none outline-none w-full"
+                            className="text-2xl sm:text-3xl font-black font-mono text-center bg-transparent border-none outline-none w-full"
                             style={{ color: "#00F0FF" }}
                             dir="ltr"
                           />
                         ) : (
-                          <p className="text-3xl font-black font-mono leading-none" style={{ color: calcMonthly > 0 ? "#00F0FF" : "var(--prd-muted)" }} dir="ltr">
+                          <p className="text-2xl sm:text-3xl font-black font-mono leading-none" style={{ color: calcMonthly > 0 ? "#00F0FF" : "var(--prd-muted)" }} dir="ltr">
                             {formatCurrency(calcMonthly)}
                           </p>
                         )}
@@ -1776,12 +1778,12 @@ export default function WebsiteCharacterization() {
                             type="number"
                             value={data.finalYearlyOverride}
                             onChange={(e) => update({ finalYearlyOverride: e.target.value === "" ? null : Number(e.target.value) })}
-                            className="text-3xl font-black font-mono text-center bg-transparent border-none outline-none w-full"
+                            className="text-2xl sm:text-3xl font-black font-mono text-center bg-transparent border-none outline-none w-full"
                             style={{ color: "#FF6B6B" }}
                             dir="ltr"
                           />
                         ) : (
-                          <p className="text-3xl font-black font-mono leading-none" style={{ color: calcYearly > 0 ? "#FF6B6B" : "var(--prd-muted)" }} dir="ltr">
+                          <p className="text-2xl sm:text-3xl font-black font-mono leading-none" style={{ color: calcYearly > 0 ? "#FF6B6B" : "var(--prd-muted)" }} dir="ltr">
                             {formatCurrency(calcYearly)}
                           </p>
                         )}
@@ -1805,9 +1807,9 @@ export default function WebsiteCharacterization() {
               </div>
 
               {/* First year total */}
-              <div className="px-5 py-3 flex items-center justify-between" style={{ background: "linear-gradient(90deg, rgba(108,99,255,0.08), rgba(0,240,255,0.08))", borderTop: "0.5px solid var(--prd-border)" }}>
+              <div className="px-4 sm:px-5 py-3 flex items-center justify-between" style={{ background: "linear-gradient(90deg, rgba(108,99,255,0.08), rgba(0,240,255,0.08))", borderTop: "0.5px solid var(--prd-border)" }}>
                 <span className="text-xs font-bold" style={{ color: "var(--prd-heading)" }}>עלות שנה ראשונה כוללת</span>
-                <span className="text-base font-black font-mono" style={{ color: "#6C63FF" }} dir="ltr">
+                <span className="text-sm sm:text-base font-black font-mono" style={{ color: "#6C63FF" }} dir="ltr">
                   {formatCurrency(firstYearTotal)}
                 </span>
               </div>
@@ -1819,9 +1821,9 @@ export default function WebsiteCharacterization() {
 
             {/* ─── What's included in monthly/yearly ─── */}
             {(extrasTotal > 0 || calcMonthlyServices > 0 || calcYearlyServices > 0) && (
-              <div className="glass rounded-xl p-5">
+              <div className="glass rounded-xl p-3 sm:p-5">
                 <div className="flex items-center justify-between mb-4">
-                  <h4 className="text-sm font-bold" style={{ color: "var(--prd-heading)" }}>פירוט המחיר החודשי/שנתי</h4>
+                  <h4 className="text-xs sm:text-sm font-bold" style={{ color: "var(--prd-heading)" }}>פירוט המחיר החודשי/שנתי</h4>
                 </div>
                 <div className="space-y-0.5">
                   {/* Features included in price */}
@@ -1895,9 +1897,9 @@ export default function WebsiteCharacterization() {
             )}
 
             {/* ─── Sections status ─── */}
-            <div className="glass rounded-xl p-5">
+            <div className="glass rounded-xl p-3 sm:p-5">
               <h4 className="text-sm font-bold mb-4" style={{ color: "var(--prd-heading)" }}>סטטוס סעיפים</h4>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+              <div className="grid grid-cols-2 gap-x-3 sm:gap-x-4 gap-y-2">
                 {[
                   { label: "עמודים", value: data.pages.length, icon: Layout, color: "#00F0FF" },
                   { label: "פיצ׳רים", value: data.selectedFeatures.length, icon: Zap, color: "#6C63FF" },
@@ -1921,7 +1923,7 @@ export default function WebsiteCharacterization() {
             </div>
 
             {/* ─── Key decisions summary ─── */}
-            <div className="glass rounded-xl p-5">
+            <div className="glass rounded-xl p-3 sm:p-5">
               <h4 className="text-sm font-bold mb-4" style={{ color: "var(--prd-heading)" }}>החלטות עיקריות</h4>
               <div className="space-y-2">
                 {[
@@ -1950,8 +1952,8 @@ export default function WebsiteCharacterization() {
             </div>
 
             {/* ─── A4 Preview ─── */}
-            <div className="glass rounded-xl p-5">
-              <div className="flex items-center justify-between mb-4">
+            <div className="glass rounded-xl p-3 sm:p-5">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 mb-4">
                 <h4 className="text-sm font-bold" style={{ color: "var(--prd-heading)" }}>תצוגה מקדימה — מסמך אפיון</h4>
                 <div className="flex items-center gap-2">
                   <button
@@ -1994,12 +1996,13 @@ export default function WebsiteCharacterization() {
               <div className="overflow-auto rounded-lg" style={{ maxHeight: 600, border: "1px solid #ddd" }}>
                 <div
                   id="a4-preview"
+                  className="w-full sm:w-auto"
                   style={{
-                    width: "210mm",
-                    minHeight: "297mm",
+                    maxWidth: "210mm",
+                    minHeight: "auto",
                     background: "#fff",
                     color: "#1a1a2e",
-                    padding: "12mm",
+                    padding: "6mm 4mm",
                     fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
                     fontSize: 11,
                     lineHeight: 1.6,
@@ -2422,7 +2425,8 @@ export default function WebsiteCharacterization() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -8, scale: 0.95 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute left-0 top-full mt-2 z-50 glass rounded-xl p-2 min-w-[180px] shadow-2xl"
+                      className="absolute left-0 top-full mt-2 z-50 glass-heavy rounded-xl p-2 min-w-[180px] shadow-2xl"
+                      style={{ backgroundColor: "var(--prd-bg)", border: "0.5px solid var(--glass-heavy-border)" }}
                     >
                       <button onClick={exportPrint} className="flex items-center gap-2.5 w-full px-3 py-2.5 rounded-lg text-xs font-medium transition-all hover:bg-white/5" style={{ color: "var(--prd-heading)" }}>
                         <Printer size={14} style={{ color: "#FF6B6B" }} />

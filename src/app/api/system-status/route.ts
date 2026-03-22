@@ -23,10 +23,10 @@ export async function GET() {
 
     const data = JSON.parse(output);
     return Response.json(data);
-  } catch (error) {
+  } catch {
     return Response.json(
-      { error: `Failed to fetch OpenClaw status: ${error}` },
-      { status: 500 }
+      { status: "unavailable", message: "OpenClaw CLI not installed or not reachable" },
+      { status: 200 }
     );
   }
 }

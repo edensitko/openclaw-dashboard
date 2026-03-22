@@ -26,7 +26,7 @@ import {
   Container,
 } from "lucide-react";
 
-interface ClawsBotData {
+interface clawbotData {
   agent: {
     name: string;
     version: string;
@@ -115,8 +115,8 @@ const settingSections = [
   },
 ];
 
-export default function ClawsBotPage() {
-  const [data, setData] = useState<ClawsBotData | null>(null);
+export default function clawbotPage() {
+  const [data, setData] = useState<clawbotData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -134,7 +134,7 @@ export default function ClawsBotPage() {
     <div className="space-y-5">
       {/* Header */}
       <div>
-        <h2 className="text-2xl font-bold text-heading">ClawsBot</h2>
+        <h2 className="text-2xl font-bold text-heading">clawbot</h2>
         <p className="text-sm text-muted">Agent configuration, integrations, and settings</p>
       </div>
 
@@ -151,7 +151,7 @@ export default function ClawsBotPage() {
             </div>
             <div>
               <h3 className="text-xl font-bold text-heading">
-                {data?.agent.name || "ClawsBot"}{" "}
+                {data?.agent.name || "clawbot"}{" "}
                 <span className="text-sm font-normal text-muted">v{data?.agent.version || "..."}</span>
               </h3>
               <p className="text-xs text-muted">

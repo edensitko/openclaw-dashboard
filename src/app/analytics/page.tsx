@@ -207,7 +207,7 @@ export default function AnalyticsPage() {
   const [usage, setUsage] = useState<any>(null);
   const [system, setSystem] = useState<any>(null);
   const [history, setHistory] = useState<any[]>([]);
-  const [clawsbot, setClawsbot] = useState<any>(null);
+  const [clawbot, setclawbot] = useState<any>(null);
   const [services, setServices] = useState<any>(null);
   const [network, setNetwork] = useState<any>(null);
   const [sessions, setSessions] = useState<any>(null);
@@ -232,7 +232,7 @@ export default function AnalyticsPage() {
       if (results[0].status === "fulfilled") setUsage(results[0].value);
       if (results[1].status === "fulfilled") setSystem(results[1].value);
       if (results[2].status === "fulfilled") setHistory(results[2].value);
-      if (results[3].status === "fulfilled") setClawsbot(results[3].value);
+      if (results[3].status === "fulfilled") setclawbot(results[3].value);
       if (results[4].status === "fulfilled") setServices(results[4].value);
       if (results[5].status === "fulfilled") setNetwork(results[5].value);
       if (results[6].status === "fulfilled") setSessions(results[6].value);
@@ -434,7 +434,7 @@ export default function AnalyticsPage() {
         <motion.div {...stagger(5)} className="glass rounded-xl p-5 sm:p-6 lg:col-span-2">
           <SectionHeader icon={Activity} title="Daily Cost Breakdown" subtitle="Stacked by provider" />
           <div className="h-48 sm:h-56">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
               <AreaChart data={dailyChart}>
                 <defs>
                   <linearGradient id="gAnthro" x1="0" y1="0" x2="0" y2="1">
@@ -470,7 +470,7 @@ export default function AnalyticsPage() {
         <motion.div {...stagger(6)} className="glass rounded-xl p-5 sm:p-6">
           <SectionHeader icon={BarChart3} title="Cost Split" subtitle="By provider" color="#6C63FF" />
           <div className="h-40 sm:h-48 flex items-center justify-center relative">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
               <PieChart>
                 <Pie
                   data={pieData}
@@ -549,14 +549,14 @@ export default function AnalyticsPage() {
         </div>
       )}
 
-      {/* ═══════════ CPU/MEMORY HISTORY + CLAWSBOT ═══════════ */}
+      {/* ═══════════ CPU/MEMORY HISTORY + clawbot ═══════════ */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         {/* CPU/Memory History Chart */}
         {historySlice.length > 2 && (
           <motion.div {...stagger(11)} className="glass rounded-xl p-5 sm:p-6">
             <SectionHeader icon={Activity} title="Resource Trends" subtitle="CPU & Memory over time" />
             <div className="h-44 sm:h-52">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <LineChart data={historySlice}>
                   <XAxis dataKey="time" tick={{ fill: "var(--t-muted)", fontSize: 10 }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fill: "var(--t-muted)", fontSize: 10 }} axisLine={false} tickLine={false} domain={[0, 100]} tickFormatter={(v) => `${v}%`} width={38} />
@@ -579,8 +579,8 @@ export default function AnalyticsPage() {
           </motion.div>
         )}
 
-        {/* ClawsBot Agent Status */}
-        {clawsbot && (
+        {/* clawbot Agent Status */}
+        {clawbot && (
           <motion.div {...stagger(12)} className="glass rounded-xl p-5 sm:p-6">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
@@ -589,27 +589,27 @@ export default function AnalyticsPage() {
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-heading">
-                    {clawsbot.agent?.name || "ClawsBot"}{" "}
-                    <span className="text-xs font-normal text-muted">v{clawsbot.agent?.version || "?"}</span>
+                    {clawbot.agent?.name || "clawbot"}{" "}
+                    <span className="text-xs font-normal text-muted">v{clawbot.agent?.version || "?"}</span>
                   </h3>
                   <p className="text-[10px] text-muted">
-                    {clawsbot.agent?.runtime} {clawsbot.agent?.nodeVersion} · PID {clawsbot.server?.pid}
+                    {clawbot.agent?.runtime} {clawbot.agent?.nodeVersion} · PID {clawbot.server?.pid}
                   </p>
                 </div>
               </div>
               <span className="pill bg-[#00FF88]/15 text-[#00FF88] flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00FF88] pulse-dot" />
-                {clawsbot.agent?.mode || "Online"}
+                {clawbot.agent?.mode || "Online"}
               </span>
             </div>
 
             {/* Agent details rows */}
             <div className="space-y-2 mb-4">
               {[
-                { label: "Model", value: clawsbot.agent?.model, icon: Zap, color: "#00F0FF" },
-                { label: "Fallback", value: clawsbot.agent?.fallbackModel, icon: Layers, color: "#FFD93D" },
-                { label: "Hostname", value: clawsbot.server?.hostname, icon: Globe, color: "#00FF88" },
-                { label: "Process Uptime", value: clawsbot.server?.processUptime ? formatUptime(clawsbot.server.processUptime) : "—", icon: Clock, color: "#6C63FF" },
+                { label: "Model", value: clawbot.agent?.model, icon: Zap, color: "#00F0FF" },
+                { label: "Fallback", value: clawbot.agent?.fallbackModel, icon: Layers, color: "#FFD93D" },
+                { label: "Hostname", value: clawbot.server?.hostname, icon: Globe, color: "#00FF88" },
+                { label: "Process Uptime", value: clawbot.server?.processUptime ? formatUptime(clawbot.server.processUptime) : "—", icon: Clock, color: "#6C63FF" },
               ].map((row) => {
                 const Icon = row.icon;
                 return (
@@ -629,9 +629,9 @@ export default function AnalyticsPage() {
               <p className="text-[10px] text-muted uppercase tracking-wider mb-2">Integrations</p>
               <div className="space-y-2">
                 {[
-                  { name: "Discord", connected: clawsbot.integrations?.discord, icon: MessageSquare, color: "#5865F2" },
-                  { name: "Anthropic", connected: clawsbot.integrations?.anthropic, icon: Cloud, color: "#D4A373" },
-                  { name: "OpenAI", connected: clawsbot.integrations?.openai, icon: Zap, color: "#10A37F" },
+                  { name: "Discord", connected: clawbot.integrations?.discord, icon: MessageSquare, color: "#5865F2" },
+                  { name: "Anthropic", connected: clawbot.integrations?.anthropic, icon: Cloud, color: "#D4A373" },
+                  { name: "OpenAI", connected: clawbot.integrations?.openai, icon: Zap, color: "#10A37F" },
                 ].map((intg) => {
                   const Icon = intg.icon;
                   return (
@@ -658,15 +658,15 @@ export default function AnalyticsPage() {
             </div>
 
             {/* Memory usage */}
-            {clawsbot.memory && (
+            {clawbot.memory && (
               <div className="border-t border-divider pt-3 mt-3">
                 <p className="text-[10px] text-muted uppercase tracking-wider mb-2">Process Memory</p>
                 <div className="grid grid-cols-4 gap-2">
                   {[
-                    { label: "RSS", value: clawsbot.memory.rss },
-                    { label: "Heap", value: clawsbot.memory.heapUsed },
-                    { label: "Total", value: clawsbot.memory.heapTotal },
-                    { label: "Ext", value: clawsbot.memory.external },
+                    { label: "RSS", value: clawbot.memory.rss },
+                    { label: "Heap", value: clawbot.memory.heapUsed },
+                    { label: "Total", value: clawbot.memory.heapTotal },
+                    { label: "Ext", value: clawbot.memory.external },
                   ].map((m) => (
                     <div key={m.label} className="glass-inset rounded-lg p-2 text-center">
                       <p className="text-[9px] text-muted">{m.label}</p>

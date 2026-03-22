@@ -115,8 +115,8 @@ const SKILLS: Skill[] = [
     },
   },
   {
-    id: "clawsbot",
-    name: "ClawsBot Agent",
+    id: "clawbot",
+    name: "clawbot Agent",
     description: "Bot status, model, integrations, and processes",
     icon: Bot,
     color: "#6C63FF",
@@ -130,7 +130,7 @@ const SKILLS: Skill[] = [
       const blocks: MessageBlock[] = [
         {
           type: "status",
-          title: "ClawsBot Status",
+          title: "clawbot Status",
           status: "ok",
           content: `${agent?.name} v${agent?.version} running on ${agent?.runtime} ${agent?.nodeVersion}`,
         },
@@ -407,7 +407,7 @@ const SKILLS: Skill[] = [
 const QUICK_COMMANDS = [
   { label: "Full report", prompt: "Run all skills and give me a full system report" },
   { label: "Health check", prompt: "Check system health — CPU, memory, disk" },
-  { label: "Bot status", prompt: "What's the ClawsBot agent status?" },
+  { label: "Bot status", prompt: "What's the clawbot agent status?" },
   { label: "Network scan", prompt: "Show me network connections and traffic" },
   { label: "Service audit", prompt: "List all running services and ports" },
 ];
@@ -420,7 +420,7 @@ function matchSkills(input: string): Skill[] {
   const lower = input.toLowerCase();
   const keywords: Record<string, string[]> = {
     system: ["system", "cpu", "memory", "disk", "uptime", "load", "health", "ram", "usage"],
-    clawsbot: ["bot", "claw", "agent", "model", "discord", "integration", "claude", "gpt"],
+    clawbot: ["bot", "claw", "agent", "model", "discord", "integration", "claude", "gpt"],
     network: ["network", "connection", "dns", "traffic", "interface", "rx", "tx", "bandwidth"],
     services: ["service", "docker", "container", "port", "process", "listen", "running"],
     tailscale: ["tailscale", "vpn", "mesh", "peer", "tunnel"],
@@ -449,7 +449,7 @@ export default function AgentPage() {
     {
       id: "welcome",
       role: "agent",
-      text: "Hey! I'm the OpenClaw Agent. I can fetch live data from your infrastructure using skills. Try asking me about system status, ClawsBot, network, services, or type **\"full report\"** for everything.",
+      text: "Hey! I'm the OpenClaw Agent. I can fetch live data from your infrastructure using skills. Try asking me about system status, clawbot, network, services, or type **\"full report\"** for everything.",
       blocks: [],
       timestamp: new Date().toISOString(),
     },

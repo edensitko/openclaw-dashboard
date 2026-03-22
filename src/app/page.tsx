@@ -89,7 +89,7 @@ function ChartTooltip({ active, payload, label }: any) {
 export default function Home() {
   const { data: sysData, history, services, network } = useSystemData(2000);
   const [usage, setUsage] = useState<any>(null);
-  const [clawsbot, setClawsbot] = useState<any>(null);
+  const [clawbot, setclawbot] = useState<any>(null);
   const [lastRefresh, setLastRefresh] = useState(new Date());
 
   const fetchExtra = useCallback(async () => {
@@ -98,7 +98,7 @@ export default function Home() {
       fetch("/api/clawsbot", { cache: "no-store" }).then((r) => r.json()),
     ]);
     if (results[0].status === "fulfilled") setUsage(results[0].value);
-    if (results[1].status === "fulfilled") setClawsbot(results[1].value);
+    if (results[1].status === "fulfilled") setclawbot(results[1].value);
     setLastRefresh(new Date());
   }, []);
 
@@ -218,7 +218,7 @@ export default function Home() {
             </div>
           </div>
           <div className="h-48 sm:h-60">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
               <AreaChart data={historySlice}>
                 <defs>
                   <linearGradient id="gCpu" x1="0" y1="0" x2="0" y2="1">
@@ -269,9 +269,9 @@ export default function Home() {
         })}
       </div>
 
-      {/* ═══════ CLAWSBOT + API COST + SYSTEM INFO ═══════ */}
+      {/* ═══════ clawbot + API COST + SYSTEM INFO ═══════ */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-        {/* ClawsBot Agent Card */}
+        {/* clawbot Agent Card */}
         <motion.div {...stagger(12)} className="glass rounded-xl p-5 sm:p-6">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#00F0FF] to-[#6C63FF] flex items-center justify-center shadow-lg shadow-[#00F0FF]/20">
@@ -279,12 +279,12 @@ export default function Home() {
             </div>
             <div>
               <h3 className="text-sm font-semibold text-heading">
-                {clawsbot?.agent?.name || "ClawsBot"}
-                <span className="text-xs font-normal text-muted ml-1.5">v{clawsbot?.agent?.version || "..."}</span>
+                {clawbot?.agent?.name || "clawbot"}
+                <span className="text-xs font-normal text-muted ml-1.5">v{clawbot?.agent?.version || "..."}</span>
               </h3>
-              <p className="text-[10px] text-muted">{clawsbot?.agent?.mode || "Loading..."}</p>
+              <p className="text-[10px] text-muted">{clawbot?.agent?.mode || "Loading..."}</p>
             </div>
-            {clawsbot && (
+            {clawbot && (
               <span className="pill bg-[#00FF88]/15 text-[#00FF88] flex items-center gap-1.5 ml-auto">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00FF88] pulse-dot" />
                 Online
@@ -293,10 +293,10 @@ export default function Home() {
           </div>
           <div className="space-y-2">
             {[
-              { label: "Model", value: clawsbot?.agent?.model, icon: Zap, color: "#00F0FF" },
-              { label: "Fallback", value: clawsbot?.agent?.fallbackModel, icon: Layers, color: "#FFD93D" },
-              { label: "Hostname", value: clawsbot?.server?.hostname, icon: Globe, color: "#00FF88" },
-              { label: "PID", value: clawsbot?.server?.pid?.toString(), icon: Terminal, color: "#6C63FF" },
+              { label: "Model", value: clawbot?.agent?.model, icon: Zap, color: "#00F0FF" },
+              { label: "Fallback", value: clawbot?.agent?.fallbackModel, icon: Layers, color: "#FFD93D" },
+              { label: "Hostname", value: clawbot?.server?.hostname, icon: Globe, color: "#00FF88" },
+              { label: "PID", value: clawbot?.server?.pid?.toString(), icon: Terminal, color: "#6C63FF" },
             ].map((row) => {
               const Icon = row.icon;
               return (
@@ -327,7 +327,7 @@ export default function Home() {
               </div>
             </div>
             <div className="h-40">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <AreaChart data={costChart}>
                   <defs>
                     <linearGradient id="gcA" x1="0" y1="0" x2="0" y2="1">

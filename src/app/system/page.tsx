@@ -347,7 +347,7 @@ export default function SystemPage() {
               </div>
             </div>
             <div className="h-48 sm:h-56">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <LineChart data={historySlice}>
                   <XAxis dataKey="time" tick={{ fill: "var(--t-muted)", fontSize: 10 }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fill: "var(--t-muted)", fontSize: 10 }} axisLine={false} tickLine={false} domain={[0, 100]} tickFormatter={(v) => `${v}%`} width={38} />
@@ -383,7 +383,7 @@ export default function SystemPage() {
               </div>
             </div>
             <div className="h-48 sm:h-56">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <BarChart data={sessionChart}>
                   <XAxis dataKey="name" tick={{ fill: "var(--t-muted)", fontSize: 10 }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fill: "var(--t-muted)", fontSize: 10 }} axisLine={false} tickLine={false} tickFormatter={(v) => fmt(v)} width={45} />
