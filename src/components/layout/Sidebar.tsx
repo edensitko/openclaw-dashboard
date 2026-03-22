@@ -18,6 +18,7 @@ import {
   KanbanSquare,
   Bell,
   Sparkles,
+  AppWindow,
 } from "lucide-react";
 
 const navItems = [
@@ -29,6 +30,7 @@ const navItems = [
   { label: "Reminders", href: "/reminders", icon: Bell, group: "Dashboard" },
   { label: "Agent", href: "/agent", icon: Sparkles, group: "Dashboard" },
   { label: "Server", href: "/servers", icon: Server, group: "Infrastructure" },
+  { label: "Apps & Ports", href: "/apps", icon: AppWindow, group: "Infrastructure" },
   { label: "Services", href: "/services", icon: Container, group: "Infrastructure" },
   { label: "Network", href: "/network", icon: Globe, group: "Infrastructure" },
   { label: "Tailscale", href: "/tailscale", icon: Network, group: "Network" },

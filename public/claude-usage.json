@@ -1,0 +1,16 @@
+{
+  "scraped_at": "2026-03-21T12:30:00Z",
+  "session": {
+    "percent": 23.5,
+    "resets": "when session ends"
+  },
+  "weekly_all": {
+    "percent": 41.2,
+    "resets": "March 24, 2026"
+  },
+  "weekly_sonnet": {
+    "percent": 38.7,
+    "resets": "March 24, 2026"
+  },
+  "extra_usage": "Not enabled"
+}
