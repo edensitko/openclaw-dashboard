@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
 
+export const dynamic = "force-dynamic";
+
 const PRICING_PATH = join(process.cwd(), "data", "pricing.json");
 
 interface PricingData {
