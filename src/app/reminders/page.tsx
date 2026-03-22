@@ -93,7 +93,7 @@ const yesterday = new Date(today.getTime() - 86400000);
 
 const DEMO_REMINDERS: Reminder[] = [
   {
-    id: "r1", title: "Deploy ClawsBot v3.2.1 to production", description: "Run migration, push Docker image, verify health checks",
+    id: "r1", title: "Deploy clawbot v3.2.1 to production", description: "Run migration, push Docker image, verify health checks",
     priority: "urgent", dueDate: fmt(today), dueTime: "14:00", recur: "none", status: "pending",
     createdAt: today.toISOString(), tags: ["deploy", "bot"],
   },

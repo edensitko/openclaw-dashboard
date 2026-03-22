@@ -7,8 +7,8 @@ export interface ActivityEvent {
 }
 
 export const activityFeed: ActivityEvent[] = [
-  { id: "1", type: "request", message: "ClawsBot agent processed 1,200 commands in the last hour", timestamp: "2 min ago" },
-  { id: "2", type: "deploy", message: "Deployed clawsbot v3.2.0 to EC2 production", timestamp: "15 min ago", user: "eden" },
+  { id: "1", type: "request", message: "clawbot agent processed 1,200 commands in the last hour", timestamp: "2 min ago" },
+  { id: "2", type: "deploy", message: "Deployed clawbot v3.2.0 to EC2 production", timestamp: "15 min ago", user: "eden" },
   { id: "3", type: "alert", message: "EC2 memory usage exceeded 90% — autoscaling triggered", timestamp: "28 min ago" },
   { id: "4", type: "error", message: "Tailscale peer eden-macbook disconnected briefly", timestamp: "45 min ago" },
   { id: "5", type: "user", message: "New Discord guild connected: Acme Corp Server", timestamp: "1h ago", user: "system" },

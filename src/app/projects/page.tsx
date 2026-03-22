@@ -125,7 +125,7 @@ const DEMO_COLUMNS: Column[] = [
       {
         id: "c2",
         title: "Discord slash commands v2",
-        description: "Upgrade ClawsBot Discord commands to use new interaction API",
+        description: "Upgrade clawbot Discord commands to use new interaction API",
         priority: "high",
         labels: ["bot", "feature"],
         steps: [
@@ -225,7 +225,7 @@ const DEMO_NOTES: Note[] = [
   {
     id: "n2",
     title: "Architecture Notes",
-    content: "ClawsBot uses Claude 3.5 Sonnet as primary model with GPT-4o-mini fallback.\n\nAll API routes go through the Next.js API layer.\n\nTailscale mesh connects all nodes.",
+    content: "clawbot uses Claude 3.5 Sonnet as primary model with GPT-4o-mini fallback.\n\nAll API routes go through the Next.js API layer.\n\nTailscale mesh connects all nodes.",
     color: NOTE_COLORS[1],
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
@@ -415,7 +415,7 @@ export default function ProjectsPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold text-heading">Projects</h2>
-          <p className="text-sm text-muted">Kanban board & notes for ClawsBot development</p>
+          <p className="text-sm text-muted">Kanban board & notes for clawbot development</p>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex glass-inset rounded-2xl p-1">

@@ -25,7 +25,7 @@ const navItems = [
   { label: "Overview", href: "/", icon: LayoutDashboard, group: "Dashboard" },
   { label: "API Usage 💰", href: "/analytics", icon: BarChart3, group: "Dashboard" },
   { label: "System Status 🖥️", href: "/system", icon: Server, group: "Dashboard" },
-  { label: "ClawsBot", href: "/clawsbot", icon: Bot, group: "Dashboard" },
+  { label: "clawbot", href: "/clawbot", icon: Bot, group: "Dashboard" },
   { label: "Projects", href: "/projects", icon: KanbanSquare, group: "Dashboard" },
   { label: "Reminders", href: "/reminders", icon: Bell, group: "Dashboard" },
   { label: "Agent", href: "/agent", icon: Sparkles, group: "Dashboard" },

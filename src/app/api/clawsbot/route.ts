@@ -16,7 +16,7 @@ export async function GET() {
   const platform = os.platform();
   const hostname = os.hostname();
 
-  // Check if clawsbot or a bot process is running
+  // Check if clawbot or a bot process is running
   let botProcess: { user: string; pid: string; cpu: string; mem: string; command: string }[] = [];
   try {
     const psOutput = platform === "darwin"
@@ -54,7 +54,7 @@ export async function GET() {
   // Memory
   const memUsage = process.memoryUsage();
 
-  // Docker containers related to clawsbot
+  // Docker containers related to clawbot
   let dockerContainers: { name: string; image: string; status: string; ports: string }[] = [];
   try {
     const dockerOut = safe('docker ps -a --format "{{.Names}}|{{.Image}}|{{.Status}}|{{.Ports}}" 2>/dev/null');
@@ -85,18 +85,18 @@ export async function GET() {
   // SystemD service check (Linux only)
   let systemdStatus = "";
   if (platform === "linux") {
-    systemdStatus = safe("systemctl is-active clawsbot 2>/dev/null") || "not found";
+    systemdStatus = safe("systemctl is-active clawbot 2>/dev/null") || "not found";
   }
 
   return NextResponse.json({
     agent: {
-      name: "ClawsBot",
-      version: process.env.CLAWSBOT_VERSION || "3.2.0",
+      name: "clawbot",
+      version: process.env.clawbot_VERSION || "3.2.0",
       nodeVersion,
       runtime: "Node.js",
-      model: process.env.CLAWSBOT_MODEL || "claude-3.5-sonnet",
-      fallbackModel: process.env.CLAWSBOT_FALLBACK_MODEL || "gpt-4o-mini",
-      mode: process.env.CLAWSBOT_MODE || "production",
+      model: process.env.clawbot_MODEL || "claude-3.5-sonnet",
+      fallbackModel: process.env.clawbot_FALLBACK_MODEL || "gpt-4o-mini",
+      mode: process.env.clawbot_MODE || "production",
     },
     server: {
       hostname,

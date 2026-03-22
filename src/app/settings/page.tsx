@@ -7,10 +7,10 @@ import { Globe, Shield, Bell, Palette, Database, Code, Bot, Server, Network, Key
 const settingSections = [
   {
     icon: Bot,
-    title: "ClawsBot Agent",
+    title: "clawbot Agent",
     description: "Agent model, fallback settings, version, and runtime config",
     color: "#00F0FF",
-    href: "/clawsbot",
+    href: "/clawbot",
   },
   {
     icon: Globe,
@@ -29,7 +29,7 @@ const settingSections = [
     title: "API Keys & Integrations",
     description: "Discord, Anthropic, OpenAI tokens and webhook endpoints",
     color: "#FFD93D",
-    href: "/clawsbot",
+    href: "/clawbot",
   },
   {
     icon: Bell,
@@ -68,7 +68,7 @@ const settingSections = [
     title: "API & Routing",
     description: "Rate limits, model routing rules, and fallback behavior",
     color: "#00F0FF",
-    href: "/clawsbot",
+    href: "/clawbot",
   },
 ];
 
@@ -77,7 +77,7 @@ export default function SettingsPage() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-heading">Settings</h2>
-        <p className="text-sm text-muted">Configure your ClawsBot instance and infrastructure</p>
+        <p className="text-sm text-muted">Configure your clawbot instance and infrastructure</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

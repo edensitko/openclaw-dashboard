@@ -19,7 +19,7 @@ export default function TopBar() {
           <Bot className="w-4 h-4 text-[#00F0FF]" />
         </div>
         <div>
-          <h1 className="text-base sm:text-lg font-semibold text-heading">ClawsBot</h1>
+          <h1 className="text-base sm:text-lg font-semibold text-heading">clawbot</h1>
           <p className="text-[10px] sm:text-xs text-muted hidden sm:block">
             EC2 Server Dashboard
           </p>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import ThemeProvider from "@/components/ThemeProvider";
@@ -15,8 +16,8 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ClawsBot Dashboard",
-  description: "Server monitoring and AI usage analytics for ClawsBot",
+  title: "clawbot Dashboard",
+  description: "Server monitoring and AI usage analytics for clawbot",
 };
 
 export default function RootLayout({
@@ -27,11 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jetbrains.variable} dark`} suppressHydrationWarning>
       <body className="antialiased" style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark');document.documentElement.classList.add('light')}}catch(e){}})()`,
-          }}
-        />
+        <Script id="theme-init" strategy="beforeInteractive">{`(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark');document.documentElement.classList.add('light')}}catch(e){}})()`}</Script>
         <ThemeProvider>
           <DashboardLayout>{children}</DashboardLayout>
         </ThemeProvider>
