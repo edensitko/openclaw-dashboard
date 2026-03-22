@@ -1,0 +1,68 @@
+/* Mobile First - Responsive Design */
+
+/* Tablet: 640px and up */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .min-h-screen {
+    padding: 1rem !important;
+  }
+  
+  .max-w-7xl {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+  
+  /* Hide desktop tabs, show mobile tabs */
+  .flex.gap-1\.5.overflow-x-auto {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  button[class*="px-3\.5"] {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.75rem !important;
+  }
+  
+  /* Adjust glass cards */
+  .glass, .glass-heavy {
+    padding: 1rem !important;
+  }
+  
+  h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  h3 {
+    font-size: 0.875rem !important;
+  }
+}
+
+/* Small phones: 480px and down */
+@media (max-width: 480px) {
+  .max-w-7xl {
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+  }
+  
+  .glass, .glass-heavy {
+    padding: 0.75rem !important;
+    border-radius: 12px !important;
+  }
+  
+  .prd-input, .prd-textarea {
+    padding: 0.5rem !important;
+    font-size: 14px !important;
+  }
+  
+  button {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.75rem !important;
+  }
+  
+  .grid {
+    gap: 0.5rem !important;
+  }
+}

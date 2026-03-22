@@ -177,3 +177,66 @@ body {
   50% { box-shadow: 0 0 0 6px rgba(0, 255, 136, 0); }
 }
 .pulse-dot { animation: pulse-glow 2s ease-in-out infinite; }
+
+/* ─── Responsive & Mobile Fixes ─── */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .max-w-7xl {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .lg\:col-span-2 {
+    grid-column: auto !important;
+  }
+
+  .flex.gap-1\.5 {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .prd-input,
+  .prd-textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+@media (max-width: 480px) {
+  .max-w-7xl {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .glass,
+  .glass-heavy {
+    padding: 0.75rem;
+    border-radius: 12px;
+  }
+
+  h1 {
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    font-size: 0.875rem;
+  }
+
+  button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .pill {
+    padding: 2px 6px;
+    font-size: 10px;
+  }
+}
