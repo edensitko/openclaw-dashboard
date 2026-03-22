@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useMemo, useEffect, useId } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import {
   Plus,
   Download,
@@ -351,7 +351,7 @@ export default function WebsiteCharacterization() {
   /* ─── CRUD: Pages ─── */
   const addPage = () => {
     update({
-      pages: [...data.pages, { id: useId(), name: "עמוד חדש", description: "", isMainNav: true, subPages: [] }],
+      pages: [...data.pages, { id: Math.random().toString(36).slice(2, 11), name: "עמוד חדש", description: "", isMainNav: true, subPages: [] }],
     });
   };
   const updatePage = (id: string, updates: Partial<SitePage>) => {
@@ -367,7 +367,7 @@ export default function WebsiteCharacterization() {
     update({
       selectedFeatures: [
         ...data.selectedFeatures,
-        { id: useId(), name, description: "", priority: "רצוי", category, estimatedCost: dynamicFeatureCosts[name] || 1000 },
+        { id: Math.random().toString(36).slice(2, 11), name, description: "", priority: "רצוי", category, estimatedCost: dynamicFeatureCosts[name] || 1000 },
       ],
     });
   };
@@ -383,7 +383,7 @@ export default function WebsiteCharacterization() {
     update({
       contentSections: [
         ...data.contentSections,
-        { id: useId(), page: "", type: "", description: "", whoProvides: "לקוח" },
+        { id: Math.random().toString(36).slice(2, 11), page: "", type: "", description: "", whoProvides: "לקוח" },
       ],
     });
   };
@@ -397,7 +397,7 @@ export default function WebsiteCharacterization() {
   /* ─── CRUD: Phases ─── */
   const addPhase = () => {
     update({
-      phases: [...data.phases, { id: useId(), name: "שלב חדש", startDate: "", endDate: "", deliverables: "" }],
+      phases: [...data.phases, { id: Math.random().toString(36).slice(2, 11), name: "שלב חדש", startDate: "", endDate: "", deliverables: "" }],
     });
   };
   const updatePhase = (id: string, updates: Partial<Phase>) => {
@@ -410,7 +410,7 @@ export default function WebsiteCharacterization() {
   /* ─── CRUD: Competitors ─── */
   const addCompetitor = () => {
     update({
-      competitors: [...data.competitors, { id: useId(), url: "", likes: "", dislikes: "" }],
+      competitors: [...data.competitors, { id: Math.random().toString(36).slice(2, 11), url: "", likes: "", dislikes: "" }],
     });
   };
   const updateCompetitor = (id: string, updates: Partial<Competitor>) => {
