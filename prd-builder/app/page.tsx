@@ -1,6 +1,11 @@
 "use client";
 
 import React, { useState, useCallback, useMemo, useEffect } from "react";
+
+// Stable ID generator - ensures same ID across renders
+const generateId = (): string => {
+  return generateId() + Date.now().toString(36).slice(-6);
+};
 import {
   Plus,
   Download,
@@ -351,7 +356,7 @@ export default function WebsiteCharacterization() {
   /* ─── CRUD: Pages ─── */
   const addPage = () => {
     update({
-      pages: [...data.pages, { id: Math.random().toString(36).slice(2, 11), name: "עמוד חדש", description: "", isMainNav: true, subPages: [] }],
+      pages: [...data.pages, { id: generateId(), name: "עמוד חדש", description: "", isMainNav: true, subPages: [] }],
     });
   };
   const updatePage = (id: string, updates: Partial<SitePage>) => {
@@ -367,7 +372,7 @@ export default function WebsiteCharacterization() {
     update({
       selectedFeatures: [
         ...data.selectedFeatures,
-        { id: Math.random().toString(36).slice(2, 11), name, description: "", priority: "רצוי", category, estimatedCost: dynamicFeatureCosts[name] || 1000 },
+        { id: generateId(), name, description: "", priority: "רצוי", category, estimatedCost: dynamicFeatureCosts[name] || 1000 },
       ],
     });
   };
@@ -383,7 +388,7 @@ export default function WebsiteCharacterization() {
     update({
       contentSections: [
         ...data.contentSections,
-        { id: Math.random().toString(36).slice(2, 11), page: "", type: "", description: "", whoProvides: "לקוח" },
+        { id: generateId(), page: "", type: "", description: "", whoProvides: "לקוח" },
       ],
     });
   };
@@ -397,7 +402,7 @@ export default function WebsiteCharacterization() {
   /* ─── CRUD: Phases ─── */
   const addPhase = () => {
     update({
-      phases: [...data.phases, { id: Math.random().toString(36).slice(2, 11), name: "שלב חדש", startDate: "", endDate: "", deliverables: "" }],
+      phases: [...data.phases, { id: generateId(), name: "שלב חדש", startDate: "", endDate: "", deliverables: "" }],
     });
   };
   const updatePhase = (id: string, updates: Partial<Phase>) => {
@@ -410,7 +415,7 @@ export default function WebsiteCharacterization() {
   /* ─── CRUD: Competitors ─── */
   const addCompetitor = () => {
     update({
-      competitors: [...data.competitors, { id: Math.random().toString(36).slice(2, 11), url: "", likes: "", dislikes: "" }],
+      competitors: [...data.competitors, { id: generateId(), url: "", likes: "", dislikes: "" }],
     });
   };
   const updateCompetitor = (id: string, updates: Partial<Competitor>) => {
