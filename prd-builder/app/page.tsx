@@ -2255,7 +2255,7 @@ export default function WebsiteCharacterization() {
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-1.5 overflow-x-auto pb-1 -mb-1">
+          <div className="flex gap-1.5 overflow-x-auto overflow-y-hidden whitespace-nowrap pb-2 -mb-2 scrollbar-hide">
             {TABS.map((tab) => {
               const Icon = tab.icon;
               const active = activeTab === tab.id;
