@@ -240,3 +240,49 @@ body {
     font-size: 10px;
   }
 }
+
+/* ─── Mobile Scroll Fix ─── */
+html, body {
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.min-h-screen {
+  height: auto !important;
+  min-height: auto !important;
+}
+
+@media (max-width: 768px) {
+  body {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .max-w-7xl {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+  }
+
+  /* Reduce header height on mobile */
+  .sticky.top-0 {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  /* Compact tabs */
+  .flex.gap-1\.5.overflow-x-auto {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+  }
+
+  /* Stack layout */
+  .grid.grid-cols-1.lg\:col-span-2 {
+    display: block;
+  }
+
+  .space-y-5 > * {
+    margin-top: 1rem;
+  }
+}
